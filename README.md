@@ -1,4 +1,4 @@
-# vibe-kit — 바이브코딩 밀키트
+# 바이브코더 스타터킷 (vibecoder-starter-kit) — 바이브코딩 밀키트
 
 > 재료는 다 깔려 있다. 당신은 **아이디어만 얹으면** 된다.
 > 요리 밀키트처럼 — 손질된 재료(외부 서비스 연결)와 조리도구(설정·훅·기획 스킬)가 준비돼 있고, 당신은 조립만 한다.
@@ -29,7 +29,7 @@
 ### (부록) 터미널이 편하면
 버튼 대신 명령어로도 같은 걸 만들 수 있다:
 ```bash
-gh repo create <내레포이름> --template bebitus-cto/bebitus-vibe-kit --clone
+gh repo create <내레포이름> --template bebitus-cto/vibecoder-starter-kit --clone
 cd <내레포이름>
 node scripts/setup.mjs        # 도구 점검 (없는 것 알려줌)
 pnpm install                  # 재료 하이드레이트
@@ -53,7 +53,7 @@ node scripts/adopt.mjs --into ../내프로젝트 --parts claude,env,plan,integra
 
 ## 부품 하나만 집어오기 (degit)
 ```bash
-npx degit bebituslab/bebitus-vibe-kit/packages/integrations/supabase lib/supabase
+npx degit bebitus-cto/vibecoder-starter-kit/packages/integrations/supabase lib/supabase
 ```
 
 ## 뭐가 들어있나
