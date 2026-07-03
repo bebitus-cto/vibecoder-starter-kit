@@ -238,7 +238,7 @@ alter table reservations enable row level security;
 create policy "own read" on reservations for select using (auth.uid() = user_id);
 -- 본인만 생성
 create policy "own insert" on reservations for insert with check (auth.uid() = user_id);
--- ⚠️ DELETE/UPDATE 는 공개 정책으로 열지 않는다 (사고 원천 차단)
+-- 주의: DELETE/UPDATE 는 공개 정책으로 열지 않는다 (사고 원천 차단)
 ​```
 ```
 
