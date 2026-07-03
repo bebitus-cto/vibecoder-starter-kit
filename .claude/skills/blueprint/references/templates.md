@@ -213,13 +213,18 @@ erDiagram
 ## 권한 (RLS = 창고 문 앞 출입 규칙)
 | 표 | 읽기 | 쓰기 | 수정·삭제 |
 |---|---|---|---|
-| reservations | 본인만 + 관리자 전체 | 본인 | 본인(취소만) · ⚠️ 공개(anon) DELETE/UPDATE 금지 |
+| reservations | 본인만 + 관리자 전체 | 본인 | 본인(취소만) · 주의: 공개(anon) DELETE/UPDATE 금지 |
 
 ## 삭제 정책
 [6-11] (soft delete 여부 · 연결 데이터 처리 · 복구 절차 [6-C3])
 
+## 연결 규칙 (FK 제약 없음)
+- 관계는 **꼬리표 컬럼**(user_id 같은 연결 번호)으로만 표현한다. **FOREIGN KEY 제약은 걸지 않는다** — 삭제·구조 변경이 유연하고, "부모 먼저 지워야" 류의 에러가 없다. 정합성은 soft delete + 앱 로직이 지킨다.
+- 대신 조회 주의: FK 제약이 없으면 Supabase 중첩 조회(`select('*, hotels(*)')`)가 동작하지 않는다 → **조인이 필요하면 두 번 나눠 읽거나 뷰(view)를 만든다.**
+- 자식 표를 읽을 땐 부모의 공개 여부를 따라 거른다 (권한 카드 상속 규칙).
+
 ## 검색·정렬
-검색: [6-12] → 인덱스 후보 · 정렬: [6-13]
+검색: [6-12] → 인덱스 후보 (걸쇠 컬럼·검색·정렬 칸에 인덱스는 AI가 챙긴다 — 사용자에게 안 묻는다) · 정렬: [6-13]
 
 ## 초기 데이터(시드)
 [6-15]
@@ -228,7 +233,7 @@ erDiagram
 ​```sql
 create table reservations (
   id bigint generated always as identity primary key,
-  user_id uuid not null references auth.users(id),
+  user_id uuid not null,  -- 꼬리표 컬럼만, FK 제약 없음 (연결 규칙 참조)
   status text not null default '대기',
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
