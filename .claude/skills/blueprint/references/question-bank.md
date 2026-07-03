@@ -407,13 +407,13 @@
 
 | 선택 | 플랫폼 | 필요한 .env 키 |
 |---|---|---|
-| 어떤 로그인이든 | Supabase Auth | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` |
+| 어떤 로그인이든 | Supabase Auth | `SUPABASE_URL`, `SUPABASE_ANON_KEY` |
 | 구글 로그인 | Google Cloud Console | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` (Supabase 대시보드에 등록) |
 | 카카오 로그인 | Kakao Developers | `KAKAO_CLIENT_ID`, `KAKAO_CLIENT_SECRET` (Supabase 대시보드에 등록) |
 | 네이버 로그인 | Naver Developers | `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET` |
 
 > **키 보안 (반드시 사용자에게 한 줄 설명)**:
-> - `NEXT_PUBLIC_SUPABASE_ANON_KEY` 는 **브라우저에 공개되는 게 정상인 키**다(Supabase 설계). 노출 자체는 위협이 아니다.
+> - `SUPABASE_ANON_KEY` 는 **브라우저에 공개되는 게 정상인 키**다(Supabase 설계). 노출 자체는 위협이 아니다.
 > - `SUPABASE_SERVICE_ROLE_KEY` (RLS 우회 마스터 키)는 **절대 `NEXT_PUBLIC_` 을 붙이지 않는다.** 서버(서버 액션·API)에서만 읽고, 클라이언트·깃허브에 노출 금지. ← 이게 진짜 치명적.
 > - **RLS 는 개발 중엔 강제하지 않는다**(데이터가 안 보이는 디버깅 지옥을 피하려고). 단 이 앱을 **남에게 공개**하기 전엔 켜야 남의 데이터 열람이 막힌다 — 배포 직전 `security-reviewer` 가 짚는다. 혼자 쓰는 데모면 안 켜도 됨.
 > - 노출 자체가 싫으면(민감 데이터 많음): 클라이언트 직접 호출 대신 **서버 전용**(`@supabase/ssr`·서버 액션). 트레이드오프 = 간단함 vs 노출 최소화.

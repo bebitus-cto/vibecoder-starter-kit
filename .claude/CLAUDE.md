@@ -25,7 +25,7 @@
 ## 스택 규칙
 - 웹 = `apps/web` (Next.js App Router) · 모바일 = `apps/mobile` (Expo).
 - 저장이 필요하면 `packages/integrations/supabase` 를 쓴다. 아주 간단하면 `google-sheets`.
-- 키는 항상 `.env` 에서 읽는다. 코드에 키를 박지 마라.
+- 키는 항상 `.env` 에서 읽는다. 코드에 키를 박지 마라. Supabase 키 이름은 `SUPABASE_URL` / `SUPABASE_ANON_KEY` (NEXT_PUBLIC_ 접두사 안 씀 — next.config 가 브라우저에 실어준다).
 - 비교는 `===` / `!==` 만. `==` / `!=` 금지. null 은 명시적으로 확인.
 
 ## 보안 — 치명적인 것만 자동으로 막는다
@@ -33,7 +33,7 @@
 
 **치명 1 — 시크릿 노출** (털리면 끝)
 - 키는 `.env` 에만. 코드·깃허브·로그에 절대 노출 금지(`.gitignore` 에 `.env` 확인).
-- `SUPABASE_SERVICE_ROLE_KEY` 같은 마스터 키(RLS 우회)는 **절대 `NEXT_PUBLIC_` 을 붙이거나 클라이언트에 두지 마라.** 서버에서만. (반면 `NEXT_PUBLIC_SUPABASE_ANON_KEY` 는 공개 전제 키라 노출돼도 됨.)
+- `SUPABASE_SERVICE_ROLE_KEY` 같은 마스터 키(RLS 우회)는 **절대 `NEXT_PUBLIC_` 을 붙이거나 클라이언트에 두지 마라.** 서버에서만. (반면 `SUPABASE_ANON_KEY` 는 공개 전제 키라 노출돼도 됨.)
 
 **치명 2 — 남의 데이터 파괴** (복구 불가)
 - 사용자 데이터 테이블에 **공개(anon) 삭제·수정 정책을 열지 마라.** 누구든 남의 데이터를 지우는 사고. (읽기 공개는 개발 중 허용 — 이게 디버깅을 편하게 한다.)

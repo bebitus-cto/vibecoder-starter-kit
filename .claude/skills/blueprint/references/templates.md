@@ -50,7 +50,7 @@
 
 | 기능 | 플랫폼 | 발급처 | .env 키 |
 |---|---|---|---|
-| [로그인] | [Supabase Auth] | supabase.com | NEXT_PUBLIC_SUPABASE_URL 외 |
+| [로그인] | [Supabase Auth] | supabase.com | SUPABASE_URL 외 |
 
 ## 8. 비기능
 - 권한 등급: [8-1]

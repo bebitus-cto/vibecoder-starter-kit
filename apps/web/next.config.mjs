@@ -13,6 +13,23 @@ const nextConfig = {
     "@vibe-kit/google-sheets",
     "@vibe-kit/ui",
   ],
+  // .env 키 이름은 SUPABASE_URL / SUPABASE_ANON_KEY (NEXT_PUBLIC_ 접두사 없이).
+  // 브라우저에서도 읽히도록 여기서 실어준다. 어느 이름으로 적어도(신·구) 둘 다 동작.
+  // anon 키는 공개 전제 키라 브라우저 노출이 정상 — 마스터 키(SERVICE_ROLE)는 절대 여기 넣지 않는다.
+  env: {
+    SUPABASE_URL:
+      process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
+    SUPABASE_ANON_KEY:
+      process.env.SUPABASE_ANON_KEY ??
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+      "",
+    NEXT_PUBLIC_SUPABASE_URL:
+      process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
+    NEXT_PUBLIC_SUPABASE_ANON_KEY:
+      process.env.SUPABASE_ANON_KEY ??
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+      "",
+  },
 };
 
 export default nextConfig;
