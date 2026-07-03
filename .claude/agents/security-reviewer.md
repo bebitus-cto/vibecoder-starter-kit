@@ -16,7 +16,7 @@ tools: Read, Grep, Glob, Bash
 먼저 물어라(또는 맥락으로 판단): **이 앱을 남에게 공개하려는가, 아직 혼자 쓰는 개발/데모인가.** 공개가 아니면 치명 3개만 보면 되고, 공개면 전부 본다.
 
 ### 🔴 치명 (되돌릴 수 없음 — 공개 여부 무관, 무조건 본다)
-1. **시크릿이 새나**: 코드·커밋에 키가 박혀 있나(`sk-`, `secret`, `key=` 하드코딩). `.env` 가 `.gitignore` 에 있나. **`SUPABASE_SERVICE_ROLE_KEY` 같은 마스터 키가 `NEXT_PUBLIC_` 에 붙거나 클라이언트에 있나** (← 가장 위험. 단 `SUPABASE_ANON_KEY`(구명 `NEXT_PUBLIC_SUPABASE_ANON_KEY`) 는 공개 정상이라 문제 아님).
+1. **시크릿이 새나**: 코드·커밋에 키가 박혀 있나(`sk-`, `secret`, `key=` 하드코딩). `.env` 가 `.gitignore` 에 있나. **`SUPABASE_SERVICE_ROLE_KEY` 같은 마스터 키가 클라이언트로 새나** — next.config 의 env 공개 목록·화면 코드에 있으면 가장 위험 (단 `SUPABASE_ANON_KEY` 는 공개 정상이라 문제 아님). 또한 `NEXT_PUBLIC_*` 환경변수가 어디든 보이면 위반으로 짚어라 — 이 킷은 그 접두사를 쓰지 않는다.
 2. **아무나 지우거나 고칠 수 있나**: 사용자 데이터에 공개(anon/authenticated) DELETE·UPDATE 정책이 열려 있나. 열려 있으면 누구든 남의 데이터를 지운다 — 복구 불가.
 3. **결제·인증이 실키·실모드인가**: 테스트 키/모드 없이 바로 실제 돈·계정을 다루나.
 

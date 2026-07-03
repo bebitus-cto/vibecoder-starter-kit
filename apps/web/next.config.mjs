@@ -13,22 +13,14 @@ const nextConfig = {
     "@vibe-kit/google-sheets",
     "@vibe-kit/ui",
   ],
-  // .env 키 이름은 SUPABASE_URL / SUPABASE_ANON_KEY (NEXT_PUBLIC_ 접두사 없이).
-  // 브라우저에서도 읽히도록 여기서 실어준다. 어느 이름으로 적어도(신·구) 둘 다 동작.
-  // anon 키는 공개 전제 키라 브라우저 노출이 정상 — 마스터 키(SERVICE_ROLE)는 절대 여기 넣지 않는다.
+  // 브라우저에 보여도 되는 "공개 키"만 여기 올린다 — 이 목록에 있어야 화면(클라이언트) 코드에서 읽힌다.
+  // 마스터 키(SERVICE_ROLE 등 secret)는 절대 이 목록에 넣지 않는다. 서버 전용.
   env: {
-    SUPABASE_URL:
-      process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
-    SUPABASE_ANON_KEY:
-      process.env.SUPABASE_ANON_KEY ??
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
-      "",
-    NEXT_PUBLIC_SUPABASE_URL:
-      process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
-    NEXT_PUBLIC_SUPABASE_ANON_KEY:
-      process.env.SUPABASE_ANON_KEY ??
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
-      "",
+    SUPABASE_URL: process.env.SUPABASE_URL ?? "",
+    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY ?? "",
+    TOSS_CLIENT_KEY: process.env.TOSS_CLIENT_KEY ?? "",
+    STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY ?? "",
+    KAKAO_MAP_APP_KEY: process.env.KAKAO_MAP_APP_KEY ?? "",
   },
 };
 

@@ -2,13 +2,8 @@
 // 키는 항상 .env 에서 읽는다 (코드에 박지 않는다). 어떤 키가 필요한지는 .env.example 참고.
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-// 키 이름은 SUPABASE_URL / SUPABASE_ANON_KEY (예전 NEXT_PUBLIC_ 이름도 받아준다)
-const url =
-  process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-const anonKey =
-  process.env.SUPABASE_ANON_KEY ??
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
-  "";
+const url = process.env.SUPABASE_URL ?? "";
+const anonKey = process.env.SUPABASE_ANON_KEY ?? "";
 
 /** 키가 진짜로 채워졌는지 (빈값·더미면 false) */
 export function hasSupabaseConfig(): boolean {

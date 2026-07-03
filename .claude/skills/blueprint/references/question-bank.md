@@ -414,7 +414,7 @@
 
 > **키 보안 (반드시 사용자에게 한 줄 설명)**:
 > - `SUPABASE_ANON_KEY` 는 **브라우저에 공개되는 게 정상인 키**다(Supabase 설계). 노출 자체는 위협이 아니다.
-> - `SUPABASE_SERVICE_ROLE_KEY` (RLS 우회 마스터 키)는 **절대 `NEXT_PUBLIC_` 을 붙이지 않는다.** 서버(서버 액션·API)에서만 읽고, 클라이언트·깃허브에 노출 금지. ← 이게 진짜 치명적.
+> - `SUPABASE_SERVICE_ROLE_KEY` (RLS 우회 마스터 키)는 **절대 브라우저로 보내지 않는다** — next.config 의 env 공개 목록에 올리지 않는다. 서버(서버 액션·API)에서만 읽고, 클라이언트·깃허브에 노출 금지. ← 이게 진짜 치명적.
 > - **RLS 는 개발 중엔 강제하지 않는다**(데이터가 안 보이는 디버깅 지옥을 피하려고). 단 이 앱을 **남에게 공개**하기 전엔 켜야 남의 데이터 열람이 막힌다 — 배포 직전 `security-reviewer` 가 짚는다. 혼자 쓰는 데모면 안 켜도 됨.
 > - 노출 자체가 싫으면(민감 데이터 많음): 클라이언트 직접 호출 대신 **서버 전용**(`@supabase/ssr`·서버 액션). 트레이드오프 = 간단함 vs 노출 최소화.
 
@@ -424,9 +424,9 @@
 
 | 선택 | 플랫폼 | 필요한 .env 키 |
 |---|---|---|
-| 국내 카드결제 | 토스페이먼츠 | `NEXT_PUBLIC_TOSS_CLIENT_KEY`, `TOSS_SECRET_KEY` (테스트 키부터) |
+| 국내 카드결제 | 토스페이먼츠 | `TOSS_CLIENT_KEY`, `TOSS_SECRET_KEY` (테스트 키부터) |
 | 국내 통합 | 포트원(구 아임포트) | `PORTONE_API_KEY`, `PORTONE_API_SECRET` |
-| 해외·구독 | Stripe | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` |
+| 해외·구독 | Stripe | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PUBLISHABLE_KEY` |
 
 **7-3. 사용자에게 이메일이나 알림을 보내야 하나요? 언제, 무엇을?**
 - 왜 묻나: "확정되면 알려주기" 한 줄이 외부 서비스 하나를 부른다. 보낼 순간과 내용을 정해야 견적이 나온다.
@@ -462,7 +462,7 @@
 
 | 선택 | 플랫폼 | 필요한 .env 키 |
 |---|---|---|
-| 지도 | Kakao Maps | `NEXT_PUBLIC_KAKAO_MAP_APP_KEY` |
+| 지도 | Kakao Maps | `KAKAO_MAP_APP_KEY` |
 | 주소 검색 | 다음 우편번호 | 키 불필요 (무료 스크립트) |
 | 문자 인증 | 솔라피 등 | `SOLAPI_API_KEY`, `SOLAPI_API_SECRET` |
 
