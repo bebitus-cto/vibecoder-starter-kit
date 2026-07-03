@@ -36,6 +36,7 @@
 - 웹 = `apps/web` (Next.js App Router) · 모바일 = `apps/mobile` (Expo).
 - 저장이 필요하면 `packages/integrations/supabase` 를 쓴다. 아주 간단하면 `google-sheets`.
 - 키는 항상 `.env` 에서 읽는다. 코드에 키를 박지 마라. Supabase 키 이름은 `SUPABASE_URL` / `SUPABASE_ANON_KEY`.
+- **테이블 만들기·바꾸기(SQL)는 CLI 없이 간다.** AI 가 SQL 전문을 만들어 보여주면, **실행은 사용자가 Supabase 대시보드 → SQL Editor 에 붙여넣어서** 한다("창고에 선반 놓기"로 안내). Supabase CLI·Vercel CLI 설치를 권하지 마라 — 이 킷의 기본 경로는 웹 콘솔이다. 실행 후 Table Editor 에서 표가 생겼는지 사용자가 눈으로 확인하게 하라.
 - **`NEXT_PUBLIC_` 접두사는 이 킷에서 금지.** 환경변수를 새로 만들 때도 붙이지 마라. 브라우저(화면 코드)에서 읽어야 하는 공개 키는 `apps/web/next.config.mjs` 의 `env` 목록에 추가하는 방식으로만 처리한다.
 - 비교는 `===` / `!==` 만. `==` / `!=` 금지. null 은 명시적으로 확인.
 - DB 관계는 **꼬리표 컬럼으로만, FOREIGN KEY 제약은 걸지 않는다** (정합성은 soft delete + 앱 로직). FK 제약이 없으면 Supabase 중첩 조회가 안 되니 **조인은 두 번 나눠 읽거나 뷰로**.
