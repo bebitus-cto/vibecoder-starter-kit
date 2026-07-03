@@ -81,12 +81,14 @@ function copyDir(srcDir, dstDir) {
   }
 }
 
-// ---------- 부품: claude (훅 + 스킬 + CLAUDE.md + settings 병합) ----------
+// ---------- 부품: claude (훅 + 스킬 + 서브에이전트 + CLAUDE.md + settings 병합) ----------
 function adoptClaude() {
   // 훅 스크립트
   copyDir(join(KIT, ".claude", "hooks"), join(TARGET, ".claude", "hooks"));
   // 스킬 (blueprint 등)
   copyDir(join(KIT, ".claude", "skills"), join(TARGET, ".claude", "skills"));
+  // 서브에이전트 (security-reviewer · code-reviewer)
+  copyDir(join(KIT, ".claude", "agents"), join(TARGET, ".claude", "agents"));
   // CLAUDE.md — 대상에 이미 있으면 절대 안 건드림 (프로젝트 정체성 존중)
   const targetClaudeMd = existsSync(join(TARGET, "CLAUDE.md")) || existsSync(join(TARGET, ".claude", "CLAUDE.md"));
   if (targetClaudeMd) {
